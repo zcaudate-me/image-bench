@@ -229,12 +229,11 @@
   ;; using org.jocl.CL/clEnqueueNDRangeKernel
   ;;   
   (def out3a (sobel-zero-output eye [1 1]))
-  (print-pixels out3a) ;; fine
+  (println (img/grayscale-to-hex out3a)) ;; fine
 
   (def out3b (sobel-zero-output eye [8 8]))
-  (print-pixels out3b) ;; Outputs are zero
-
-  )
+  (println (img/grayscale-to-hex out3b)) ;; Outputs are zero
+)
 
 
 (comment
