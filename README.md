@@ -14,7 +14,7 @@ C++:
   
     ./run.sh
   
-This will compile the code and run `bin/sobel_benchmark`, showing outputs for the sobel transform on different sized images:
+This will compile the code and run `bin/sobel_benchmark`, showing outputs for the sobel transform on different sized images for different local workgroup size:
 
     --------------------------------------
     SOBEL TRANSFORM (1, 1)
