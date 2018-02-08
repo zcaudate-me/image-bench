@@ -1,3 +1,10 @@
 language: clojure
 script: lein test
 jdk: oraclejdk8
+addons:
+  apt:
+    packages:
+    - ocl-icd-opencl-dev
+
+before_script:
+  - lein deps
