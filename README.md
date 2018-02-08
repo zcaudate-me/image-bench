@@ -56,49 +56,50 @@ Clojure
 
 There is currently a bug in [image-bench.sobel](https://github.com/zcaudate-me/image-bench) where setting local workgroup size to more than [1 1] will cause errors. This is reproducible by following the [comment block](https://github.com/zcaudate-me/image-bench/blob/master/source/clojure/image_bench/sobel.clj#L196-L237) in the source code:
 
-    (use 'image-bench.sobel)
-    (require '[image-bench.core :as img]
-             '[image-bench.grayscale :as gray])
-    
-    ;;
-    ;;
-    ;; can also try "resources/lena-0250x0250.jpg"
-    (def eye (-> (img/load-image "resources/eye-0016x0016.jpg")
-                 (gray/grayscale)))
-  
-    (img/display-image eye)
-    (println (img/grayscale-to-hex eye))
+```clojure
+(use 'image-bench.sobel)
+(require '[image-bench.core :as img]
+         '[image-bench.grayscale :as gray])
+
+;;
+;;
+;; can also try "resources/lena-0250x0250.jpg"
+(def eye (-> (img/load-image "resources/eye-0016x0016.jpg")
+             (gray/grayscale)))
+
+(img/display-image eye)
+(println (img/grayscale-to-hex eye))
 
 
-    ;;
-    ;; using cl/event and cl/enq-nd!
-    ;; 
-    (def out1a (sobel-invalid-event-error eye [1 1])) 
-    (println (img/grayscale-to-hex out1a)) ;; fine
+;;
+;; using cl/event and cl/enq-nd!
+;; 
+(def out1a (sobel-invalid-event-error eye [1 1])) 
+(println (img/grayscale-to-hex out1a)) ;; fine
 
-    ;; throws OpenCL error: CL_INVALID_EVENT
-    (def out1b (sobel-invalid-event-error eye [8 8]))
+;; throws OpenCL error: CL_INVALID_EVENT
+(def out1b (sobel-invalid-event-error eye [8 8]))
 
 
-    ;;
-    ;; using only cl/enq-nd!
-    ;;   
-    (def out2a (sobel-invalid-work-group-error eye [1 1]))
-    (println (img/grayscale-to-hex out2a)) ;; fine
+;;
+;; using only cl/enq-nd!
+;;   
+(def out2a (sobel-invalid-work-group-error eye [1 1]))
+(println (img/grayscale-to-hex out2a)) ;; fine
 
-    ;; throw OpenCL error: CL_INVALID_WORK_GROUP_SIZE
-    (def out2b (sobel-invalid-work-group-error eye [8 8]))
-  
+;; throw OpenCL error: CL_INVALID_WORK_GROUP_SIZE
+(def out2b (sobel-invalid-work-group-error eye [8 8]))
 
-    ;;
-    ;; using org.jocl.CL/clEnqueueNDRangeKernel
-    ;;   
-    (def out3a (sobel-zero-output eye [1 1]))
-    (println (img/grayscale-to-hex out3a));; fine
 
-    (def out3b (sobel-zero-output eye [8 8]))
-    (println (img/grayscale-to-hex out3b)) ;; Outputs are zero
+;;
+;; using org.jocl.CL/clEnqueueNDRangeKernel
+;;   
+(def out3a (sobel-zero-output eye [1 1]))
+(println (img/grayscale-to-hex out3a));; fine
 
+(def out3b (sobel-zero-output eye [8 8]))
+(println (img/grayscale-to-hex out3b)) ;; Outputs are zero
+```
 ## License
 
 Copyright © 2018 Chris Zheng
