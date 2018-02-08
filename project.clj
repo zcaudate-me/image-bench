@@ -10,7 +10,7 @@
                  ;;[org.bytedeco.javacpp-presets/opencv-platform "3.4.0-1.4"]
                  [com.twelvemonkeys.imageio/imageio-tiff "3.3.2"]]
                  
-  :aliases {"test" ["trampoline" "run" "-m" "hara.test" "exit"]}
+  :aliases {"test" ["run" "-m" "hara.test" "exit"]}
   
   :profiles {:dev {:dependencies [[zcaudate/hara.object "2.8.1"]
                                   [zcaudate/hara.test "2.8.1"]

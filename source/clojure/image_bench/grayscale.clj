@@ -5,8 +5,7 @@
             [image-bench.image :as img])
   (:import java.awt.image.BufferedImage
            image.bench.Util
-           org.jocl.CL
-           org.bytedeco.javacpp.opencv_core$Mat))
+           org.jocl.CL))
 
 
 (defn ^BufferedImage grayscale-jvm
