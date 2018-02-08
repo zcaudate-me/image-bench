@@ -18,6 +18,6 @@
 (fact "running a sobel kernel at [345, 912] [13, 3]"
 
   (def img (img/load-image "resources/lena-0345x0912.jpg"))
-
-  (gray/grayscale img [13 3])
+  
+  (img/display-image (gray/grayscale img [13 3]))
   => java.awt.image.BufferedImage)

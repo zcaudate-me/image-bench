@@ -35,10 +35,8 @@
        (common/with-release [prog    (cl/build-program! (cl/program-with-source ctx [program-source]))
                              p-src   (cl/cl-buffer ctx (* 3 width height) :read-only)
                              p-dst   (cl/cl-buffer ctx (* width height) :write-only)
-                             sobel-kernel (cl/kernel prog "grayscale_uchar")
-                             done    (cl/event)
-                             events  (doto (make-array org.jocl.cl_event 1) (aset 0 done))]
-         (cl/set-args! sobel-kernel
+                             kernel (cl/kernel prog "grayscale_uchar")]
+         (cl/set-args! kernel
                        p-src
                        (int-array [width])
                        (int-array [0])
@@ -48,22 +46,17 @@
                        (int-array [width])
                        (int-array [0]))
          (cl/enq-write! cqueue p-src (img/data-array input))
-         
-         ;; 1. This option runs but it doesn't do anything
-         (CL/clEnqueueNDRangeKernel cqueue
-                                    sobel-kernel
+
+         (cl/enq-nd! cqueue kernel work-size)
+         #_(CL/clEnqueueNDRangeKernel cqueue
+                                    kernel
                                     (.workdim work-size)
                                     (.offset work-size)
                                     (.global work-size)
                                     (.local work-size)
                                     0
                                     nil
-                                    done)
-
-         ;; 2. This option returns ExceptionInfo OpenCL error: CL_INVALID_WORK_GROUP_SIZE.
-         ;;(cl/enq-nd! cqueue sobel-kernel work-size done)
-
-         (CL/clWaitForEvents 1 events)
+                                    nil)
          
          (cl/enq-read! cqueue p-dst (img/data-array output)))))))
 
