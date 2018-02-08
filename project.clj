@@ -36,4 +36,5 @@
                            clojure.core
                            [lucid.mind .& .> .? .* .% .%> .>var .>ns])]
   :java-source-paths ["source/java"]
-  :source-paths ["source/clojure"])
+  :source-paths ["source/clojure"]
+  :test-paths ["test/clojure"])

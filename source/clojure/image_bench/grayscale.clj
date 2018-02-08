@@ -67,3 +67,9 @@
          (CL/clWaitForEvents 1 events)
          
          (cl/enq-read! cqueue p-dst (img/data-array output)))))))
+
+
+(comment
+  (def lena (img/load-image "resources/lena-0500x0500.jpg"))
+
+  (def lena-gray (grayscale lena [8 8])))
