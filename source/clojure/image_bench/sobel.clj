@@ -43,30 +43,10 @@
                        (int-array [width])
                        (int-array [0]))
          (cl/enq-write! cqueue p-src (img/data-array input))
-
-         (println "Settings:"
-                  (.workdim work-size)
-                  (seq (.offset work-size))
-                  (seq (.global work-size))
-                  (seq (.local work-size)))
-         
-         ;; 1. This option runs but it doesn't do anything
-         #_(CL/clEnqueueNDRangeKernel cqueue
-                                    sobel-kernel
-                                    (.workdim work-size)
-                                    (.offset work-size)
-                                    (.global work-size)
-                                    (.local work-size)
-                                    0
-                                    nil
-                                    done)
-
-         ;; 2. This option returns ExceptionInfo OpenCL error: CL_INVALID_WORK_GROUP_SIZE.
          (cl/enq-nd! cqueue sobel-kernel work-size done)
-
          (CL/clWaitForEvents 1 events)
-                    
          (cl/enq-read! cqueue p-dst (img/data-array output)))))))
+
 
 
 ;; __kernel void sobel_uchar(__global const uchar * src, int src_step, int src_offset, int rows, int cols,
@@ -90,10 +70,7 @@
        (common/with-release [prog    (cl/build-program! (cl/program-with-source ctx [program-source]))
                              p-src   (cl/cl-buffer ctx (* width height) :read-only)
                              p-dst   (cl/cl-buffer ctx (* width height) :write-only)
-                             sobel-kernel (cl/kernel prog "sobel_uchar")
-                             ;;done    (cl/event)
-                             ;;events  (doto (make-array org.jocl.cl_event 1) (aset 0 done))
-                             ]
+                             sobel-kernel (cl/kernel prog "sobel_uchar")]
          (cl/set-args! sobel-kernel
                        p-src
                        (int-array [width])
@@ -104,31 +81,7 @@
                        (int-array [width])
                        (int-array [0]))
          (cl/enq-write! cqueue p-src (img/data-array input))
-
-         (println "Settings:"
-                  (.workdim work-size)
-                  (seq (.offset work-size))
-                  (seq (.global work-size))
-                  (seq (.local work-size)))
-         
-         ;; 1. This option runs but it doesn't do anything
-         #_(CL/clEnqueueNDRangeKernel cqueue
-                                    sobel-kernel
-                                    (.workdim work-size)
-                                    (.offset work-size)
-                                    (.global work-size)
-                                    (.local work-size)
-                                    0
-                                    nil
-                                    done)
-
-         ;; 2. This option returns ExceptionInfo OpenCL error: CL_INVALID_WORK_GROUP_SIZE.
-         (cl/enq-nd! cqueue sobel-kernel work-size
-                     ;;done
-                     )
-
-         ;;(CL/clWaitForEvents 1 events)
-                    
+         (cl/enq-nd! cqueue sobel-kernel work-size)
          (cl/enq-read! cqueue p-dst (img/data-array output)))))))
 
 
@@ -167,13 +120,6 @@
                        (int-array [0]))
          (cl/enq-write! cqueue p-src (img/data-array input))
 
-         (println "Settings:"
-                  (.workdim work-size)
-                  (seq (.offset work-size))
-                  (seq (.global work-size))
-                  (seq (.local work-size)))
-         
-         ;; 1. This option runs but it doesn't do anything
          (CL/clEnqueueNDRangeKernel cqueue
                                     sobel-kernel
                                     (.workdim work-size)
@@ -184,11 +130,7 @@
                                     nil
                                     done)
 
-         ;; 2. This option returns ExceptionInfo OpenCL error: CL_INVALID_WORK_GROUP_SIZE.
-         ;;(cl/enq-nd! cqueue sobel-kernel work-size done)
-
-         (CL/clWaitForEvents 1 events)
-                    
+         (CL/clWaitForEvents 1 events)           
          (cl/enq-read! cqueue p-dst (img/data-array output)))))))
 
 
