@@ -20,7 +20,7 @@
                                   [zcaudate/lucid.unit "1.4.0"]
                                   [zcaudate/lucid.core.inject "1.4.0"]]
   		              :plugins [[lein-ancient "0.6.15"]
-                              ;[lein-virgil "0.1.7"]
+                              [lein-virgil "0.1.7"]
                               ]}}
 
   :injections  [(require '[lucid.core.inject :as inject]
