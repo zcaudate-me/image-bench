@@ -10,7 +10,8 @@
                  ;;[org.bytedeco.javacpp-presets/opencv-platform "3.4.0-1.4"]
                  ;;[com.twelvemonkeys.imageio/imageio-tiff "3.3.2"]
                  ]
-                 
+  :profiles {:dev {:dependencies [[zcaudate/hara.test "2.8.1"]]
+ 		               :plugins      [[lein-virgil "0.1.7"]]}}
   :aliases {"test" ["run" "-m" "hara.test" "exit"]}
   :java-source-paths ["source/java"]
   :source-paths ["source/clojure"]
