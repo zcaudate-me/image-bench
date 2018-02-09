@@ -1,11 +1,7 @@
-language: clojure
+language: c
 script: lein test
-jdk: oraclejdk8
-addons:
-  apt:
-    packages:
-    - amdgpu-pro
-    - ocl-icd-opencl-dev
-
+os: 
+  - osx
 before_script:
+  - brew install leiningen
   - lein deps
