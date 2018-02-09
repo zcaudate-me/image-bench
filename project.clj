@@ -8,7 +8,8 @@
                  ;;[org.bytedeco.javacpp-presets/opencv "3.4.0-1.4"]
                  ;;[org.bytedeco.javacpp-presets/opencv "3.4.0-1.4" :classifier "macosx-x86_64"]
                  ;;[org.bytedeco.javacpp-presets/opencv-platform "3.4.0-1.4"]
-                 [com.twelvemonkeys.imageio/imageio-tiff "3.3.2"]]
+                 ;;[com.twelvemonkeys.imageio/imageio-tiff "3.3.2"]
+                 ]
                  
   :aliases {"test" ["run" "-m" "hara.test" "exit"]}
   
@@ -20,7 +21,7 @@
                                   [zcaudate/lucid.unit "1.4.0"]
                                   [zcaudate/lucid.core.inject "1.4.0"]]
   		              :plugins [[lein-ancient "0.6.15"]
-                              [lein-virgil "0.1.7"]
+                              ;[lein-virgil "0.1.7"]
                               ]}}
 
   :injections  [(require '[lucid.core.inject :as inject]
