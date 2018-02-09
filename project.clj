@@ -3,6 +3,7 @@
   :url "https://gitlab.com/zcaudate/image-bench"
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [uncomplicate/clojurecl "0.8.0"]
+                 [zcaudate/hara.io.encode "2.8.1"]
                  ;;[org.bytedeco/javacv "1.4"]
                  ;;[org.bytedeco/javacv-platform "1.4"]
                  ;;[org.bytedeco.javacpp-presets/opencv "3.4.0-1.4"]
