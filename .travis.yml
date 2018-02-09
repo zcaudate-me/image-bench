@@ -1,8 +1,11 @@
 language: clojure
 script: lein test
 jdk: oraclejdk8
-os:
-  - osx
+addons:
+  apt:
+    packages:
+    - amdgpu-pro
+    - ocl-icd-opencl-dev
 
 before_script:
   - lein deps
