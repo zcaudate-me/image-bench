@@ -12,31 +12,6 @@
                  ]
                  
   :aliases {"test" ["run" "-m" "hara.test" "exit"]}
-  
-  :profiles {:dev {:dependencies [[zcaudate/hara.object "2.8.1"]
-                                  [zcaudate/hara.test "2.8.1"]
-                                  [zcaudate/lucid.mind "1.4.0"]
-                                  [zcaudate/lucid.package "1.4.0"]
-                                  [zcaudate/lucid.publish "1.4.0"]
-                                  [zcaudate/lucid.unit "1.4.0"]
-                                  [zcaudate/lucid.core.inject "1.4.0"]]
-  		              :plugins [[lein-ancient "0.6.15"]
-                              ;[lein-virgil "0.1.7"]
-                              ]}}
-
-  :injections  [(require '[lucid.core.inject :as inject]
-                         'hara.test
-                         'hara.object
-                         'lucid.unit
-                         'lucid.publish
-                         'lucid.package)
-                (inject/in [lucid.core.inject :refer [inject [in inject-in]]]
-                           [lucid.package pull]
-                           [hara.io.project project]
-                           [hara.object to-map to-data]
-   
-                           clojure.core
-                           [lucid.mind .& .> .? .* .% .%> .>var .>ns])]
   :java-source-paths ["source/java"]
   :source-paths ["source/clojure"]
   :test-paths ["test/clojure"])
