@@ -1,0 +1,22 @@
+---
+format_version: '4'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: macos
+trigger_map:
+- push_branch: "*"
+  workflow: primary
+- pull_request_source_branch: "*"
+  workflow: primary
+workflows:
+  primary:
+    steps:
+    - activate-ssh-key@3.1.1: {}
+    - git-clone@4.0.5: {}
+    - script@1.1.5:
+        title: Run Script
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            java --version
+            brew install leiningen
+            lein test
