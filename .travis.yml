@@ -2,6 +2,7 @@ language: c
 script: lein test
 os: 
   - osx
+osx_image: xcode9.3beta
 before_script:
   - brew install leiningen
   - lein deps
