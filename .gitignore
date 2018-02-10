@@ -13,3 +13,4 @@ pom.xml.asc
 /resources/lena*.txt
 #
 /bin
+*.log

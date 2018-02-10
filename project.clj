@@ -4,6 +4,7 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [uncomplicate/clojurecl "0.8.0"]
                  [zcaudate/hara.io.encode "2.8.1"]
+                 [zcaudate/hara.reflect "2.8.1"]
                  ;;[org.bytedeco/javacv "1.4"]
                  ;;[org.bytedeco/javacv-platform "1.4"]
                  ;;[org.bytedeco.javacpp-presets/opencv "3.4.0-1.4"]
@@ -12,7 +13,9 @@
                  ;;[com.twelvemonkeys.imageio/imageio-tiff "3.3.2"]
                  ]
   :profiles {:dev {:dependencies [[zcaudate/hara.test "2.8.1"]]
- 		               :plugins      [[lein-virgil "0.1.7"]]}}
+ 		               :plugins      [[lein-virgil "0.1.7"]]
+                   :jvm-opts ["--illegal-access=permit"]
+                   :injections [(use 'hara.reflect)]}}
   :aliases {"test" ["run" "-m" "hara.test" "exit"]}
   :java-source-paths ["source/java"]
   :source-paths ["source/clojure"]
