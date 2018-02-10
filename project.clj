@@ -14,7 +14,6 @@
                  ]
   :profiles {:dev {:dependencies [[zcaudate/hara.test "2.8.1"]]
  		               :plugins      [[lein-virgil "0.1.7"]]
-                   :jvm-opts ["--illegal-access=permit"]
                    :injections [(use 'hara.reflect)]}}
   :aliases {"test" ["run" "-m" "hara.test" "exit"]}
   :java-source-paths ["source/java"]

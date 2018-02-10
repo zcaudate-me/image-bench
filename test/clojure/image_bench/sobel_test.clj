@@ -15,11 +15,11 @@
 
 
 ;; FAILS
-(fact "running a grayscale kernel at [345, 912] [13, 3]"
+(fact "running a grayscale kernel at [345, 912] [15, 3]"
 
   (def img (img/load-image "resources/lena-0345x0912.jpg"))
   
-  (gray/grayscale img [13 3])
+  (gray/grayscale img [15 3])
   => java.awt.image.BufferedImage)
 
 ;; PASSES
@@ -32,9 +32,9 @@
 
 
 ;; FAILS
-(fact "running a sobel kernel at [345, 912] [13, 3]"
+(fact "running a sobel kernel at [345, 912] [15, 3]"
 
   (def img (img/load-image "resources/lena-0345x0912.jpg"))
 
-  (sobel/sobel-invalid-work-group-error img [13 3])
+  (sobel/sobel-invalid-work-group-error img [15 3])
   => java.awt.image.BufferedImage)
