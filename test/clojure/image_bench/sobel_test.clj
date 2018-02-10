@@ -13,6 +13,14 @@
   (gray/grayscale img)
   => java.awt.image.BufferedImage)
 
+;; PASSES
+(fact "running a grayscale kernel at [1000 1000] [4 4]"
+
+  (def img (img/load-image "resources/lena-1000x1000.jpg"))
+
+  (gray/grayscale img [4 4])
+  => java.awt.image.BufferedImage)
+
 
 ;; FAILS
 (fact "running a grayscale kernel at [345, 912] [15, 3]"
