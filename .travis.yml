@@ -1,10 +1,11 @@
 language: c
-script: lein test
+script: 
+  - lein test
 os: 
   - osx
 osx_image:
   - xcode9.2
 before_script:
-  - brew install leiningen
   - java -version
+  - brew install leiningen
   - lein deps
